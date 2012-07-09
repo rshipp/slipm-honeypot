@@ -1,0 +1,46 @@
+#!/bin/bash
+# slipm-honeypot
+# This is a simple low-interaction port monitoring honeypot, designed
+# primarily for research and detection purposes. It uses netcat as a
+# port listener, tshark to attempt to capture attack traffic, and (by
+# default) notify-send to alert the user when a possible attack is
+# detected. The honeypot itself is written in bash, and allows for easy
+# extension of emulated services with additional bash scripts. In order
+# to increase security, the script should NOT be run as root, or with
+# any elevated privelages. All it needs is the ability to run the
+# required programs, read permissions on its plugins and
+# configuration, and write permissions in whatever directory you 
+# choose to save the logs.
+
+BLUE='\e[1;34m'
+YELLOW='\e[1;33m'
+RED='\e[1;31m'
+END='\e[0m'
+
+INFO="[${BLUE}+${END}]"
+LOG="[x]"
+ERR="[${RED}!${END}]"
+
+echo >&2
+echo -e "Welcome to Slipm ${YELLOW}honey${END}pot, version 0.1!  :)" >&2
+echo >&2
+echo -e "$LOG Slipm honeypot started $(date)"
+
+fail() {
+    echo -e "$ERR $1" >&2
+    echo -e "$LOG Slipm honeypot terminated with error 1, $(date)"
+    echo -e "$LOG Buh bye!"
+    exit 1
+}
+
+echo -e "$INFO Reading configuration..."
+if [[ -r slipm.conf ]]; then
+    source slipm.conf || fail "Invalid configuration file. :("
+elif [[ -r ~/.slipm.conf ]]; then
+    source ~/.slipm.conf || fail "Invalid configuration file. :("
+elif [[ -r /etc/slipm/slipm.conf ]]; then
+    source /etc/slipm/slipm.conf || fail "Invalid configration file. :("
+else
+    fail "No configuration file found. :("
+fi
+

@@ -1,0 +1,12 @@
+This is a simple low-interaction port monitoring honeypot, designed
+primarily for research and detection purposes. It uses netcat as a
+port listener, tshark to attempt to capture attack traffic, and (by
+default) notify-send to alert the user when a possible attack is
+detected. The honeypot itself is written in bash, and allows for easy
+extension of emulated services with additional bash scripts. In order
+to increase security, the script should NOT be run as root, or with
+any elevated privelages. All it needs is the ability to run the
+required programs, read permissions on its plugins and configuration,
+and write permissions in whatever directory you choose to save the
+logs.
+
