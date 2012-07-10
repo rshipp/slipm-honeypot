@@ -69,7 +69,8 @@ usertrap() {
 
 watchloop() {
     while true; do
-        $4 nc $2 -l $3 -e "/tmp/slipm-pluginshandler '$1' '$pluginsdir'"
+        $4 nc -vv $2 -l $3 -e "/tmp/slipm-pluginshandler '$1' \
+            '$pluginsdir'" 2>"$logdir/$(date +%s)_nc.log"
     done
 }
 
