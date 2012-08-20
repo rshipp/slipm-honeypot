@@ -25,6 +25,8 @@ echo >&2
 echo -e "Welcome to Slipm ${YELLOW}honey${END}pot, version 0.1!  :)" >&2
 echo >&2
 
+[[ -d /tmp/slipm/ ]] || mkdir -p /tmp/slipm
+
 trapme() {
     echo -e "$LOG Buh bye!"
     rm -f /tmp/slipm-pluginshandler
@@ -52,7 +54,7 @@ makeph() {
     local f=/tmp/slipm-pluginshandler
     echo '#!/bin/bash' > $f
     echo "sudo -u $USER $notify \"Possible attack detected!\nPlugin: \$1\nLive logs: $logdir\"" >> $f
-    echo "tshark -i $interface -w \"$logdir/\$(date +%s)_\$1.pcap\" 2>/dev/null &" >> $f
+    echo "tshark -i $interface -w \"$logdir/\$(date +%s)_\$1.pcap\"  &" >> $f
     echo "source \"\$2/\$1.sh\"" >> $f
     echo "start 2>\"$logdir/\$(date +%s)_\$1.log\"" >> $f
     chmod +x /tmp/slipm-pluginshandler
