@@ -8,4 +8,4 @@ to increase security, the script should NOT be run as root, or with
 any elevated privelages. All it needs is the ability to run the
 required programs, read permissions on its plugins and
 configuration, and write permissions in whatever directory you 
-choose to save the logs and in /tmp
+choose to save the logs and in /tmp.
