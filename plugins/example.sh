@@ -20,7 +20,7 @@ ncopts="-T"
 # This is the function that will be called when the plugin is run.
 # Anything echoed to the shell will be sent through netcat to the
 # attacker. Anything read from stdin will come from netcat. To send
-# information to the log, write to stdout (like: echo hi >&2).
+# information to the log, write to stderr (like: echo hi >&2).
 start() {
     echo "Example!"
     local somevariable
