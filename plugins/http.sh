@@ -9,25 +9,25 @@ start() {
 
     read request
     if [[ $request =~ "GET / .*" || $request =~ "HEAD / .*" ]]; then
-        echo "client: $request" >&2
+        log "client: $request"
         response="HTTP/1.1 200 OK"
     elif [[ $request =~ "GET /.*" || $request =~ "HEAD /.*" ]]; then
-        echo "client: $request" >&2
+        log "client: $request"
         response="HTTP/1.1 404 Not Found"
     else
         response="HTTP/1.1 500 Internal Server Error"
-        echo "client: $request" >&2
+        log "client: $request"
     fi
 
     while true; do
         read request
         if [[ $request == "" ]]; then
-            echo "client: $request" >&2
+            log "client: $request"
             echo "$response"
-            echo "server: $response" >&2
+            log "server: $response"
             break
         else
-            echo "client: $request" >&2
+            log "client: $request"
         fi
     done
 }

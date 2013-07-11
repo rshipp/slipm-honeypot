@@ -1,14 +1,8 @@
 #!/bin/bash
 # slipm-honeypot
 
-BLUE='\e[1;34m'
-YELLOW='\e[1;33m'
-RED='\e[1;31m'
-END='\e[0m'
-INFO="[${BLUE}+${END}]"
-LOG="[x]"
-ERR="[${RED}!${END}]"
-depends=( bash chmod nc tshark sudo notify-send )
+. lib/slipm.sh
+depends=( bash chmod nc tshark sudo notify-send pidof killall )
 
 echo >&2
 echo -e "Welcome to Slipm ${YELLOW}honey${END}pot, version 0.1!  :)" >&2
